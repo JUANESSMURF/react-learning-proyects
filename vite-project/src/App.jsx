@@ -29,10 +29,15 @@ function App() {
   const [turn, setTurn] = useState(TURNS.X)
 
   const updateBoard = (index) => {
+    //No actualizar esta posicion del board si ya tiene algo
+    if (board[index]) return
+
+    // Al darle click guarda posicion X u O
     const newBoard = [...board]
-    newBoard[index] = turn // Al darle click guarda posicion X u O
+    newBoard[index] = turn 
     setBoard(newBoard)
 
+    //Cambia el turno
     const newTurn = turn === TURNS.X ? TURNS.O : TURNS.X
     setTurn(newTurn)
   }
