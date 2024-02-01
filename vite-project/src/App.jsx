@@ -2,8 +2,8 @@ import { useState } from "react"
 import confetti from "canvas-confetti"
 import { Square } from "./components/Square.jsx"
 import { TURNS } from "./constants.js"
-import { checkWinnerFrom } from "./logic/board.js"
-
+import { WinnerModal } from "./components/WinnerModal.jsx"
+import { checkEndGame, checkWinnerFrom } from "./logic/board.js"
 
 
 function App() {
@@ -23,11 +23,7 @@ function App() {
     setWinner(null)
   }
 
-  const checkEndGame = (newBoard) => {
-    // revisar si no hay mas espacios vacios en el tablero
-    // si en square hay otra cosa que no sea null(vacio)
-    return newBoard.every((square) => square !== null)
-  }
+  
 
   const updateBoard = (index) => {
     //No actualizar esta posicion del board si ya tiene algo o ya tiene ganador
@@ -78,29 +74,7 @@ function App() {
           {TURNS.O}
         </Square>
       </section>
-      {
-        winner !== null && (
-          <section className="winner">
-            <div className="text">
-              <h2>
-                {
-                  winner == false
-                    ? 'Empate'
-                    : 'Gano: '
-                }
-              </h2>
-
-              <header className="win">
-                {winner && <Square>{winner}</Square>}
-              </header>
-
-              <footer>
-                <button onClick={resetGame}>Empezar de nuevo</button>
-              </footer>
-            </div>
-          </section>
-        )
-      }
+      <WinnerModal resetGame={resetGame} winner={winner}/>
     </main>
     )
   }

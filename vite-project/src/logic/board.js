@@ -15,3 +15,9 @@ export const checkWinnerFrom = (boardToCheck) => {
     //si no hay ganador
     return null
   }
+
+export const checkEndGame = (newBoard) => {
+    // revisar si no hay mas espacios vacios en el tablero
+    // si en square hay otra cosa que no sea null(vacio)
+    return newBoard.every((square) => square !== null)
+  }
